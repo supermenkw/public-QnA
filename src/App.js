@@ -35,26 +35,9 @@ class App extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.dbRef.push({ title: this.state.newQuestion, upvote: 0, downvote: 0 })
+    const timestamp = Date.now();
+    this.dbRef.push({ title: this.state.newQuestion, date: timestamp, totalAnswer: 0 })
 
-  }
-
-  handleUpVote = (event, questions, key) => {
-    const { title, upvote, downvote } = questions
-    this.dbRef.child(key).set({
-      title,
-      upvote: upvote + 1,
-      downvote
-    })
-  }
-
-  handleDownVote = (event, questions, key) => {
-    const { title, upvote, downvote } = questions
-    this.dbRef.child(key).set({
-      title,
-      upvote,
-      downvote: downvote + 1
-    })
   }
 
   render() {
@@ -69,7 +52,7 @@ class App extends Component {
           </form>
         </div>
         {this.state.data ?
-          <List questions={this.state.data} handleUpVote={this.handleUpVote} handleDownVote={this.handleDownVote} /> :
+          <List questions={this.state.data} /> :
           <div className="loader"></div>}
       </div>
     )
