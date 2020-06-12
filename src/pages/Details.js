@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { database } from '../firebase';
 import { Link } from 'react-router-dom';
 import ListAnswer from '../components/ListAnswer';
+import './details.css'
 
 class Details extends Component {
     constructor(props) {
@@ -64,35 +65,43 @@ class Details extends Component {
         }
 
         return (
-            <div className="container mx-auto px-4 py-8">
-                <Link to="/" className="bg-teal hover:bg-teal-dark text-white font-bold py-2 px-4 rounded shadow no-underline">Back</Link>
-                <div classNam="flex justify-center">
-                    <h3 className="text-4xl text-center font-blod text-grey-darker mx-5">Detail</h3>
-                </div>
+            <div className="container mt-3">
+                <Link to="/" className="btn btn-secondary">Back</Link>
+                <h3 className="text-center mt-2">Detail</h3>
                 {this.state.data === null ?
-                    console.log('mengambil data...')
+                    <div className="card mb-4 p-4">
+                        <div className="card-body">
+                            <div className="row justify-content-center">
+                                <div class="spinner-border" role="status"></div>
+                            </div>
+
+                        </div>
+                    </div>
                     :
-                    <div className="my-6 mx-3 font-sans text-2xl text-grey-darker">
-                        <div className="flex bg-blue-lightest shadow border p-6 my-5">
-                            <div className="content ml-4">
-                                <div className="title text-4xl">{this.state.data.title}</div>
-                                <div className="votes py-2 px-3">
+                    <div className="col-12">
+                        <div className="card mb-4">
+                            <div className="card-body">
+                                <h2 className="card-title">{this.state.data.title}</h2>
+                                <div className="card-sub-title">
                                     <span className="pr-2">Created at {convertTimestamp(this.state.data.date)}</span>
                                     <span className="pr-2"> | Total Answer : {this.state.data.totalAnswer}</span>
                                 </div>
                             </div>
                         </div>
                     </div>}
-                <div className="flex justify-center">
-                    <form onSubmit={this.handleSubmit}>
-                        <label className="text-2xl font-blod text-grey-darker">Answer : </label>
-                        <input type="text" onChange={this.handleChange} className="border rounded shadow py-2 dx-3 mx-3" />
-                        <button type="submit" className="bg-teal hover:bg-teal-dark text-white font-bold py-2 px-4 rounded shadow">Submit</button>
+                <div className="row justify-content-center">
+                    <form className="form-inline" onSubmit={this.handleSubmit}>
+                        <h2 for="inputAnswer" id="answer-text">Answer</h2>
+                        <input id="inputAnswer" type="text" onChange={this.handleChange} className="ml-3 mr-3 form-control" />
+                        <button type="submit" className="btn btn-secondary">Submit</button>
                     </form>
                 </div>
                 {this.state.answerData ?
                     <ListAnswer answers={this.state.answerData} /> :
-                    <div className="loader"></div>}
+                    <div className="row justify-content-center">
+                        <div class="spinner-border m-5" role="status"></div>
+                    </div>
+                }
             </div>
         )
     }

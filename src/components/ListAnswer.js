@@ -11,12 +11,12 @@ const List = ({ answers, handleUpVote, handleDownVote }) => {
     }
 
     return (
-        <div className="my-6 mx-3 font-sans text-2xl text-grey-darker">
+        <div>
             {Object.keys(answers).sort(sortList).map((key) => (
-                <div key={key} className="flex bg-blue-lightest shadow border p-6 my-5">
-                    <div className="content ml-4">
-                        <div className="title text-4xl">{answers[key].answer}</div>
-                        <div className="votes py-2 px-3">
+                <div key={key} className="card mt-4 text-decoration-none">
+                    <div className="card-body">
+                        <h3 className="card-title">{answers[key].answer}</h3>
+                        <div className="card-sub-title">
                             <span className="pr-2">Created at {convertTimestamp(answers[key].date)}</span>
                         </div>
                     </div>

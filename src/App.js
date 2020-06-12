@@ -42,18 +42,21 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container mx-auto px-4 py-8" >
-        <div className="flex font-sans font-bold text-4xl justify-center mb-8 text-grey-darker">Public QnA</div>
-        <div className="flex justify-center">
-          <form onSubmit={this.handleSubmit}>
-            <label className="text-2xl font-blod text-grey-darker">Question : </label>
-            <input type="text" onChange={this.handleChange} className="border rounded shadow py-2 dx-3 mx-3" />
-            <button type="submit" className="bg-teal hover:bg-teal-dark text-white font-bold py-2 px-4 rounded shadow">Submit</button>
+      <div className="container" >
+        <h1 className="text-center m-4">Public QnA</h1>
+        <div className="row justify-content-center mb-5">
+          <form className="form-inline text-center" onSubmit={this.handleSubmit}>
+            <h2 for="inputQuestion" id="question-text">Question</h2>
+            <input id="inputQuestion" type="text" onChange={this.handleChange} className="ml-3 mr-3 form-control" />
+            <button type="submit" className="btn btn-secondary">Submit</button>
           </form>
         </div>
         {this.state.data ?
           <List questions={this.state.data} /> :
-          <div className="loader"></div>}
+          <div className="row justify-content-center">
+            <div class="spinner-border m-5" role="status"></div>
+          </div>
+        }
       </div>
     )
   }
